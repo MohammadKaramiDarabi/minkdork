@@ -1,2 +1,0 @@
-# minkdork
-For Learning MVP
