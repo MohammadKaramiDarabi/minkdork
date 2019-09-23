@@ -41,7 +41,7 @@ ext{
     calligraphyVersion = '2.2.0'
     glideVersion = '3.7.0'
     rx2FastAndroidNetworking = '1.0.1'
-    dagger2Version = '2.24'
+    dagger2Version = '2.16'
     rxjava2Version = '2.0.6'
     rxandroidVersion = '2.1.1'
     butterKnifeVersion = '8.8.1'
