@@ -3,7 +3,6 @@ package com.example.mindork
 import android.app.Activity
 import android.app.Application
 import com.example.mindork.di.component.DaggerAppComponent
-import dagger.MembersInjector
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector

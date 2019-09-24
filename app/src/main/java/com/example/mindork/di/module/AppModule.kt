@@ -9,6 +9,7 @@ import com.example.mindork.data.database.repository.options.OptionRepo
 import com.example.mindork.data.database.repository.options.OptionRepository
 import com.example.mindork.data.database.repository.questions.QuestionRepo
 import com.example.mindork.data.database.repository.questions.QuestionRepositoty
+import com.example.mindork.data.network.ApiHeader
 import com.example.mindork.data.network.ApiHelper
 import com.example.mindork.data.network.AppApiHelper
 import com.example.mindork.data.preference.PreferenceHelper
@@ -16,8 +17,10 @@ import com.example.mindork.di.PreferenceInfo
 import com.example.mindork.util.AppConstants
 import com.example.mindork.data.preference.AppPreferenceHelper
 import com.example.mindork.di.ApiKeyInfo
+import com.example.mindork.util.SchedulerProvider
 import dagger.Module
 import dagger.Provides
+import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Singleton
 
 @Module
@@ -59,6 +62,20 @@ class AppModule {
     @Provides
     @ApiKeyInfo
     internal fun provideApiKeyInfo(): String = BuildConfig.API_KEY
+
+    @Provides
+    @Singleton
+    internal fun provideProtectedApiHeader(@ApiKeyInfo apiKey: String, preferenceHelper: PreferenceHelper)
+            : ApiHeader.ProtectedApiHeader = ApiHeader.ProtectedApiHeader(apiKey = apiKey,
+        userId = preferenceHelper.getCurrentUserId(),
+        accessToken = preferenceHelper.getAccessToken())
+
+    @Provides
+    internal fun provideSchedulerProvider(): SchedulerProvider = SchedulerProvider()
+
+    @Provides
+    internal fun provideCompositeDisposable(): CompositeDisposable = CompositeDisposable()
+
 
 
 }

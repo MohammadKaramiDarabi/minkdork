@@ -7,7 +7,7 @@ import com.example.mindork.data.database.repository.options.OptionDao
 import com.example.mindork.data.database.repository.questions.Question
 import com.example.mindork.data.database.repository.questions.QuestionsDao
 
-@Database(entities = [Question::class, Option::class], version = 1)
+@Database(entities = [Question::class, Option::class], version = 1,exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun questionDao(): QuestionsDao

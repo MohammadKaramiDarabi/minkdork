@@ -2,13 +2,15 @@ package com.example.mindork.di.component
 
 import android.app.Application
 import com.example.mindork.MvpApp
+import com.example.mindork.di.builder.ActivityBuilder
 import com.example.mindork.di.module.AppModule
 import dagger.BindsInstance
 import dagger.Component
+import dagger.android.AndroidInjectionModule
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [AppModule::class])
+@Component(modules = [AndroidInjectionModule::class,AppModule::class,ActivityBuilder::class])
 interface AppComponent {
 
     @Component.Builder

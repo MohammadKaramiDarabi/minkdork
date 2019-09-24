@@ -1,5 +1,6 @@
 package com.example.mindork.ui.splash.presenter
 
+import android.os.CountDownTimer
 import com.example.mindork.ui.base.presenter.BasePresenter
 import com.example.mindork.ui.splash.inetactor.SplashMVPInteractor
 import com.example.mindork.ui.splash.view.SplashMVPView
@@ -16,6 +17,17 @@ class SplashPresenter <V: SplashMVPView, I: SplashMVPInteractor> @Inject constru
     override fun onAttach(view: V?) {
         super.onAttach(view)
 
+        object :CountDownTimer(3000,3000){
+            override fun onFinish() {
+                feedInDatabase()
+            }
+
+            override fun onTick(millisUntilFinished: Long) {
+
+            }
+
+        }.start()
+
     }
 
     private fun feedInDatabase() = interactor?.let {
@@ -23,7 +35,9 @@ class SplashPresenter <V: SplashMVPView, I: SplashMVPInteractor> @Inject constru
             .flatMap { interactor?.seedOptions()}
             .compose(schedulerProvider.ioToMainObservableScheduler())
             .subscribe {
-                getView()?.let {  }
+                getView()?.let {
+                    decideActivityToOpen()
+                }
             }
         )
     }

@@ -1,9 +1,6 @@
 package com.example.mindork.data.database.repository.options
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.PrimaryKey
+import androidx.room.*
 import com.example.mindork.data.database.repository.questions.Question
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
@@ -31,7 +28,7 @@ data class Option (
 
     @Expose
     @SerializedName("question_id")
-    @ColumnInfo(name = "question_id")
+    @ColumnInfo(name = "question_id",index = true)
     var questionId: Long,
 
     @Expose
