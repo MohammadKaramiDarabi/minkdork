@@ -9,6 +9,7 @@ import com.example.mindork.ui.login.interactor.LoginMVPInteractor
 import com.example.mindork.ui.login.presenter.LoginMVPPresenter
 import com.example.mindork.ui.main.ui.MainActivity
 import com.example.mindork.util.AppConstants
+import kotlinx.android.synthetic.main.activity_login.*
 import javax.inject.Inject
 
 class LoginActivity : BaseActivity(), LoginMVPView {
@@ -20,7 +21,7 @@ class LoginActivity : BaseActivity(), LoginMVPView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         presenter.onAttach(this)
-        setOnClickListenter()
+        setOnClickListeners()
     }
 
     override fun onDestroy() {
@@ -28,24 +29,30 @@ class LoginActivity : BaseActivity(), LoginMVPView {
         super.onDestroy()
     }
 
-    override fun showValidationMessage(errorCode: Int) = when (errorCode) {
-        AppConstants.EMPTY_EMAIL_ERROR -> Toast.makeText(this,"Email cannot be blank",Toast.LENGTH_LONG).show()
-        AppConstants.INVALID_EMAIL_ERROR -> Toast.makeText(this,"Please enter a valid email address",Toast.LENGTH_LONG).show()
-        AppConstants.EMPTY_PASSWORD_ERROR -> Toast.makeText(this,"Password cannot be empty",Toast.LENGTH_LONG).show()
-        AppConstants.LOGIN_FAILURE -> Toast.makeText(this,"Login failed",Toast.LENGTH_LONG).show()
-        else -> Unit
+    override fun onFragmentDetached(tag: String) {
+    }
+
+    override fun onFragmentAttached() {
+    }
+
+    override fun showValidationMessage(errorCode: Int) {
+        when (errorCode) {
+            AppConstants.EMPTY_EMAIL_ERROR -> Toast.makeText(this, getString(R.string.empty_email_error_message), Toast.LENGTH_LONG).show()
+            AppConstants.INVALID_EMAIL_ERROR -> Toast.makeText(this, getString(R.string.invalid_email_error_message), Toast.LENGTH_LONG).show()
+            AppConstants.EMPTY_PASSWORD_ERROR -> Toast.makeText(this, getString(R.string.empty_password_error_message), Toast.LENGTH_LONG).show()
+            AppConstants.LOGIN_FAILURE -> Toast.makeText(this, getString(R.string.login_failure), Toast.LENGTH_LONG).show()
+        }
     }
 
     override fun openMainActivity() {
-        startActivity(Intent(this, MainActivity::class.java))
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
         finish()
     }
 
-    override fun onFragmentAttached() {}
-
-    override fun onFragmentDetached(tag: String) {}
-
-    private fun setOnClickListenter() {
-
+    private fun setOnClickListeners() {
+        btnServerLogin.setOnClickListener { presenter.onServerLoginClicked(et_email.text.toString(), et_password.text.toString()) }
+        ibGoogleLogin.setOnClickListener { presenter.onGoogleLoginClicked() }
+        ibFbLogin.setOnClickListener { presenter.onFBLoginClicked() }
     }
 }

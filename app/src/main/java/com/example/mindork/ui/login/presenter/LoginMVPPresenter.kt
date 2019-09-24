@@ -1,6 +1,5 @@
 package com.example.mindork.ui.login.presenter
 
-import com.example.mindork.ui.base.presenter.BasePresenter
 import com.example.mindork.ui.base.presenter.MVPPresenter
 import com.example.mindork.ui.login.interactor.LoginMVPInteractor
 import com.example.mindork.ui.login.view.LoginMVPView

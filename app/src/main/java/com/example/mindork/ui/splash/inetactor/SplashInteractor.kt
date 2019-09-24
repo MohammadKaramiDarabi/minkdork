@@ -42,9 +42,9 @@ class SplashInteractor @Inject constructor(
                     type
                 )
                 questionRepoHelper.insertQuestions(questionList)
-            } else {
-            }
-            Observable.just(false)
+            } else
+                Observable.just(false)
+
         }
     }
 
@@ -59,9 +59,8 @@ class SplashInteractor @Inject constructor(
                     FileUtils.loadJSONFromAsset(context, AppConstants.SEED_DATABASE_OPTIONS), type
                 )
                 optionRepoHelper.insertOptions(optionList)
-            } else {
-            }
-            Observable.just(false)
+            } else
+                Observable.just(false)
         }
     }
 

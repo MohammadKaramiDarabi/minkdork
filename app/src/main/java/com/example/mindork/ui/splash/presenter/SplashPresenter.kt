@@ -17,7 +17,7 @@ class SplashPresenter <V: SplashMVPView, I: SplashMVPInteractor> @Inject constru
     override fun onAttach(view: V?) {
         super.onAttach(view)
 
-        object :CountDownTimer(3000,3000){
+        object :CountDownTimer(2000,2000){
             override fun onFinish() {
                 feedInDatabase()
             }
@@ -44,7 +44,7 @@ class SplashPresenter <V: SplashMVPView, I: SplashMVPInteractor> @Inject constru
 
     private fun decideActivityToOpen() = getView()?.let {
         if (isUserLoggedIn())
-            it.openLoginActivity()
+            it.openMainActivity()
         else
             it.openLoginActivity()
     }
